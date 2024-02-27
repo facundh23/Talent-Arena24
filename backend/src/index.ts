@@ -1,15 +1,31 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-
 dotenv.config();
+
+import deviceRoute from './routes/device';
+import bodyParser from 'body-parser';
+import db from './connection';
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ test: 'test' });
 });
 
+app.use('/device', deviceRoute);
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log('Syncasdsaeststs ed db.');
+  })
+  .catch((err) => {
+    console.log('Failed to sync db: ' + err);
+  });
