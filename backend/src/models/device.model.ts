@@ -1,10 +1,14 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { TrackingModel } from './tracking.model'; 
+import { DeviceStatus } from '../enums/device-status';
+import { TrackingModel } from './tracking.model';
 
 export class DeviceModel extends Model {
   public id!: string;
   public name!: string;
   public type!: string;
+  public latitude!: string;
+  public longitude!: string;
+  public status!: string;
 }
 
 export default (sequelize: Sequelize) => {
@@ -21,14 +25,24 @@ export default (sequelize: Sequelize) => {
       type: {
         type: DataTypes.STRING,
       },
+      latitude: {
+        type: DataTypes.STRING,
+      },
+      longitude: {
+        type: DataTypes.STRING,
+      },
+      status: {
+        type: DataTypes.ENUM({
+          values: Object.values(DeviceStatus),
+        }),
+        defaultValue: DeviceStatus.UNREACHABLE,
+      },
     },
     {
       sequelize,
       modelName: 'device',
     }
   );
-  
-  DeviceModel.hasMany(TrackingModel, { as: "trackings" });
 
   return DeviceModel;
 };
