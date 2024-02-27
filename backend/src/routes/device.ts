@@ -5,12 +5,10 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
     const result = await DeviceHandler.createDevice(req.body);
     res.json(result);
   } catch (error) {
     res.status(500).send();
-    console.log('ERROR =>', error);
   }
 });
 
