@@ -1,4 +1,7 @@
+import { useState } from "react"
 import ConsultDeviceText from "../../components/ConsultDeviceText"
+import { searchQueryUseCase } from "../../../core/use-case/search-query.use-case";
+import { CounterDevices } from "../../components/CounterDevices";
 
 const devices = [
   {id:'dron', text:'Dron'},
@@ -6,12 +9,31 @@ const devices = [
   {id:'ship', text:'Ship'},
 ]
 
+interface Message {
+  text:string;
+}
+
 export const HomePage = () => {
 
+  const [isLoading, setIsloading] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+
+
+  const handlePost = async(text:string, selectedOption:string) => {
+    setIsloading(true);
+    const newQuery = `${text} - ${selectedOption}`
+    setMessages((prev) => [...prev, {text:newQuery}]);
+
+    const data = await searchQueryUseCase(text, selectedOption)
+    if(!data.ok) return;
+
+    setIsloading(false);
+  }
   
   return (
     <div>
-      <ConsultDeviceText placeholder="Search your device" onSendQuery={query => console.log(query)} options={devices} />
+      <ConsultDeviceText placeholder="Search your device" onSendQuery={handlePost} options={devices} />
+      <CounterDevices />
     </div>
   )
 }

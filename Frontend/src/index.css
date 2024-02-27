@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body {
-  background-color: #000000;
+  background-color: white;
   color: white;
   font-family: 'Open Sans', sans-serif;
   
@@ -32,7 +32,7 @@ em {
 
 
 .btn-primary {
-  @apply bg-indigo-500 text-white font-bold py-2 px-4 rounded-xl hover:bg-indigo-700 transition-all duration-200 ease-in-out;
+  @apply bg-black text-white font-bold py-2 px-4 rounded-xl hover:bg-indigo-700 transition-all duration-200 ease-in-out;
 }
 
 .btn-primary:disabled {
