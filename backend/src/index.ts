@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import deviceRoute from './routes/device';
+import trackingRoute from './routes/tracking';
 import bodyParser from 'body-parser';
 import db from './connection';
 
@@ -16,6 +17,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/device', deviceRoute);
+app.use('/tracking', trackingRoute);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
