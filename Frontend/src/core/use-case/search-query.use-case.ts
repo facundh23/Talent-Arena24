@@ -1,15 +1,15 @@
 import { SearchResp } from "../../interfaces/searchQueryResp";
 
 
-export const searchQueryUseCase = async (query:string, option:string) => {
-   
+export const searchQueryUseCase = async (name:string, type:string, id:string) => {
+   debugger
     try {
-        const resp = await fetch(`${import.meta.env.VITE_GPT_API}/search`,{
+        const resp = await fetch(`http://localhost:3000/device`,{
             method:'POST',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({query, option}),
+            body: JSON.stringify({name, type, id}),
         });
         if (!resp.ok) throw new Error("I couldn't make the request");
         const {content} = await resp.json() as SearchResp;

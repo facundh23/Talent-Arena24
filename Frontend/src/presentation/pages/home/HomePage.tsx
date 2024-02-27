@@ -19,12 +19,12 @@ export const HomePage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
 
 
-  const handlePost = async(text:string, selectedOption:string) => {
+  const handlePost = async(text:string, selectedOption:string, id:string) => {
     setIsloading(true);
     const newQuery = `${text} - ${selectedOption}`
     setMessages((prev) => [...prev, {text:newQuery}]);
 
-    const data = await searchQueryUseCase(text, selectedOption)
+    const data = await searchQueryUseCase(text, selectedOption, id)
     if(!data.ok) return;
 
     setIsloading(false);
@@ -32,7 +32,7 @@ export const HomePage = () => {
   
   return (
     <div>
-      <ConsultDeviceText placeholder="Search your device" onSendQuery={handlePost} options={devices} />
+      <ConsultDeviceText placeholder="Create your device" onSendQuery={handlePost} options={devices} />
       <CounterDevices />
     </div>
   )
