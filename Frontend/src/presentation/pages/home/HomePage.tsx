@@ -1,62 +1,55 @@
-import { useState } from "react"
-import ConsultDeviceText from "../../components/ConsultDeviceText"
-import { createhQueryUseCase } from "../../../core/use-case/search-query.use-case";
-import { CounterDevices } from "../../components/CounterDevices";
-import { CreateDevice } from "../../modal/CreateDevice";
-import Navbar from "../../components/Navbar";
+import { useEffect, useState } from 'react';
+import ConsultDeviceText from '../../components/ConsultDeviceText';
+import { searchQueryUseCase } from '../../../core/use-case/search-query.use-case';
+import { CounterDevices } from '../../components/CounterDevices';
+import Map from '../../components/Map';
+import { Device } from '../../../interfaces/device';
+import { getAllDevices } from '../../../core/use-case/get-all-devices';
 
-const devices = [
-  {id:'dron', name:'Dron'},
-  {id:'plane', name:'Plane'},
-  {id:'ship', name:'Ship'},
-]
-
-
+const deviceTypes = [
+  { id: 'dron', text: 'Dron' },
+  { id: 'plane', text: 'Plane' },
+  { id: 'ship', text: 'Ship' },
+];
 
 interface Message {
-  text:string;
+  text: string;
 }
 
 export const HomePage = () => {
-
+  const [devices, setDevices] = useState<Device[]>([]);
   const [isLoading, setIsloading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  useEffect(() => {
+    getAllDevices().then(setDevices)
+  }, [])
 
 
-  
-  const handleCreateDevice = async(text:string, selectedOption:string, id:string) => {
+  const handlePost = async (
+    text: string,
+    selectedOption: string,
+    id: string
+  ) => {
     setIsloading(true);
-    const newQuery = `${text} - ${selectedOption}`
-    setMessages((prev) => [...prev, {text:newQuery}]);
+    const newQuery = `${text} - ${selectedOption}`;
+    setMessages((prev) => [...prev, { text: newQuery }]);
 
-    const data = await createhQueryUseCase(text, selectedOption, id)
-    if(!data.ok) return;
+    const data = await searchQueryUseCase(text, selectedOption, id);
+    if (!data.ok) return;
 
     setIsloading(false);
-  }
-  
+  };
+
   return (
     <div>
-      <Navbar isOpen={openModal}  />
-      {
-        !isLoading && <ConsultDeviceText placeholder="Search your device"  options={devices} />
-      }
-      
-      {
-        modalIsOpen && <CreateDevice  closeModal={closeModal} onSendQuery={handleCreateDevice} options={devices} />
-      }
+      <ConsultDeviceText
+        placeholder="Create your device"
+        onSendQuery={handlePost}
+        options={deviceTypes}
+      />
       <CounterDevices />
+      <Map devices={devices}></Map>
     </div>
-  )
-}
-
-
+  );
+};
