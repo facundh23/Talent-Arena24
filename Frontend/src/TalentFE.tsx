@@ -1,9 +1,11 @@
-import React from 'react'
+
+import { RouterProvider } from 'react-router-dom'
+import { router } from './presentation/router/router'
 
 export const TalentFE = () => {
   return (
     <div>
-      <h1>main</h1>
+      <RouterProvider router={router} />
     </div>
   )
 }
