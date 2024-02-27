@@ -2,7 +2,6 @@ import { Sequelize } from 'sequelize';
 import device from './models/device.model';
 
 const { DB_USER, DB_NAME, DB_PASSWORD, DB_PORT, DB_HOST } = process.env;
-console.log({ DB_USER, DB_NAME, DB_PASSWORD, DB_PORT, DB_HOST });
 const sequelize = new Sequelize({
   database: DB_NAME,
   host: DB_HOST,
@@ -10,7 +9,6 @@ const sequelize = new Sequelize({
   port: Number(DB_PORT),
   username: DB_USER,
   dialect: 'mysql',
-  logging: console.log,
   logQueryParameters: true,
   pool: {
     max: 5,
