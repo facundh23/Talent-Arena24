@@ -3,6 +3,7 @@ import device from './models/device.model';
 import tracking from './models/tracking.model';
 
 const { DB_USER, DB_NAME, DB_PASSWORD, DB_PORT, DB_HOST } = process.env;
+console.log({ DB_USER, DB_NAME, DB_PASSWORD, DB_PORT, DB_HOST})
 const sequelize = new Sequelize({
   database: DB_NAME,
   host: DB_HOST,
