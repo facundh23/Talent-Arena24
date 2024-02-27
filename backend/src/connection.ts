@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import device from './models/device.model';
+import tracking from './models/tracking.model';
 
 const { DB_USER, DB_NAME, DB_PASSWORD, DB_PORT, DB_HOST } = process.env;
 const sequelize = new Sequelize({
@@ -22,6 +23,7 @@ const db = {
   Sequelize: Sequelize,
   sequelize: sequelize,
   device: device(sequelize),
+  tracking: tracking(sequelize),
 };
 
 export default db;

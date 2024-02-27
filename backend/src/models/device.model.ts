@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import { DeviceStatus } from '../enums/device-status';
+import { TrackingModel } from './tracking.model';
 
 export class DeviceModel extends Model {
   public id!: string;
@@ -16,6 +17,7 @@ export default (sequelize: Sequelize) => {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
