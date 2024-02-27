@@ -2,9 +2,10 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import deviceRoute from './routes/device';
+import trackingRoute from './routes/tracking';
 import bodyParser from 'body-parser';
 import db from './connection';
-import deviceRoute from './routes/device';
 import deviceTypeRoute from './routes/device-type';
 import notifyRoute from './routes/notify';
 
@@ -20,6 +21,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/device', deviceRoute);
 app.use('/device-type', deviceTypeRoute);
 app.use('/notify', notifyRoute);
+
+
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
