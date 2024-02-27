@@ -1,10 +1,11 @@
 import { SearchResp } from "../../interfaces/searchQueryResp";
 
 
-export const searchQueryUseCase = async (name:string, type:string, id:string) => {
+  
+export const createhQueryUseCase = async (name:string, type:string, id:string) => {
    debugger
     try {
-        const resp = await fetch(`http://localhost:3000/device`,{
+        const resp = await fetch(`http://localhost:3000/create`,{
             method:'POST',
             headers: {
                 'Content-type': 'application/json'
