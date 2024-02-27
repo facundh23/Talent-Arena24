@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
+import { TrackingModel } from './tracking.model'; 
 
 export class DeviceModel extends Model {
   public id!: string;
@@ -12,6 +13,7 @@ export default (sequelize: Sequelize) => {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -25,6 +27,8 @@ export default (sequelize: Sequelize) => {
       modelName: 'device',
     }
   );
+  
+  DeviceModel.hasMany(TrackingModel, { as: "trackings" });
 
   return DeviceModel;
 };
