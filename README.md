@@ -1,7 +1,5 @@
 # Talent Arena Challenge
 
-# Brief description of the application.
-
 - Install Node.js and npm on your local machine, and Code Editor like Visual Code .
 1. **NODE**: https://nodejs.org/es/download
 2. **NPM**:  https://www.npmjs.com/package/npm
