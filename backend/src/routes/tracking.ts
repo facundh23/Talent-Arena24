@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const result = await TrackingHandler.createTracking(req.body);
+    const result = await TrackingHandler.getAllTrackings();
     res.json(result);
   } catch (error) {
     res.status(500).send();

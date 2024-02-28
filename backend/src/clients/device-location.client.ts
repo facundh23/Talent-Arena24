@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Tracking } from '../interfaces/tracking';
 
 export interface DeviceLocationRequest {
   device: {
@@ -55,5 +56,40 @@ export class DeviceLocationClient {
       }
     );
     return response.data;
+  }
+
+  public static async verifyTrackingLocation(
+    tracking: Tracking
+  ): Promise<boolean> {
+    const options = {
+      method: 'POST',
+      url: 'https://location-verification.p-eu.rapidapi.com/verify',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': process.env.API_KEY,
+        'X-RapidAPI-Host': 'location-verification.nokia.rapidapi.com',
+      },
+      data: {
+        device: {
+          networkAccessIdentifier: tracking.deviceId,
+        },
+        area: {
+          areaType: 'Circle',
+          center: {
+            latitude: tracking.endPointLatitude,
+            longitude: tracking.endPointLongitud,
+          },
+          radius: 1000,
+        },
+        maxAge: 60,
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      return response.data.verificationResult === 'TRUE';
+    } catch (error) {
+      return false;
+    }
   }
 }
