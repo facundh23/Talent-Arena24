@@ -47,7 +47,7 @@ export const HomePage = () => {
         options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
-      <Map devices={devices} onClickAddTracking={async (device: Device) => {console.log(device)}}></Map>
+      <Map devices={devices}></Map>
       <CounterDevices
         offlineDevices={devicesCount.offlineDevices}
         onlineDevices={devicesCount.onlineDevices}
