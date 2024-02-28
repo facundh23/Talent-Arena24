@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react'
 interface Props {
     onSendQuery: (query: string, selectedOption: string, id: string) => void;
     closeModal:() => void;
-    isOpen: () => void
+    isOpen:  boolean
     options: any[]
 }
 
