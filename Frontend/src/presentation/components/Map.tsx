@@ -58,7 +58,7 @@ const MapComponent = ({ devices }: Props) => {
   };
 
   return (
-    <div className="w-100vw bg-indigo-600 md:h-96 h-72 mt-2 p-2 rounded-lg flex items-center justify-center gap-7">
+    <div className="w-100vw navbarColor md:h-96 h-72 mt-2 p-5 border-4 border-white rounded-lg flex items-center justify-center gap-7">
       <MapContainer
         className="h-full w-full"
         center={position}
