@@ -2,16 +2,9 @@ import { FormEvent, useState } from 'react';
 import { Device } from '../../interfaces/device';
 
 interface Props {
-<<<<<<< HEAD
-    onSendQuery: (query: string, selectedOption: string, id: string) => void;
-    closeModal:() => void;
-    isOpen:  boolean
-    options: any[]
-=======
   closeModal: () => void;
   options: { id: string; name: string }[];
   handleCreateDevice: (data: Partial<Device>) => Promise<void>;
->>>>>>> bfe21d11c8d2885b00199751d160d0db823c26a9
 }
 
 export const CreateDevice = ({
@@ -37,7 +30,7 @@ export const CreateDevice = ({
     <div className="w-[100%]  fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex  justify-center items-center md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-40">
       <form
         onSubmit={onSubmitForm}
-        className="w-[70%] h-[80%]  border-x-indigo-500 border-y-black border-4 flex flex-col md:w-[70%] md:h-[20%] md:flex-col p-6 mt-[10%] gap-2  md:mx-auto transition-all duration-500"
+        className="w-[70%] h-[50%]  border-x-indigo-500 border-y-black border-4 flex flex-col md:w-[70%] md:h-[20%] md:flex-col p-6 mt-[10%] gap-2  md:mx-auto transition-all duration-500"
       >
         <div className="flex flex-col items-center gap-2 md:flex-row md:w-100%">
           <input
@@ -71,7 +64,7 @@ export const CreateDevice = ({
             onChange={(e) => setType(e.target.value)}
             className="w-full md:w-2/5 md:ml-5  border rounded-xl text-gray-800 focus:outline-none focus:border-indigo-600 pl-4 h-10"
           >
-            <option value="">Options</option>
+            <option className='h-10' value="">Options</option>
             {options.map((device) => (
               <option key={device.id} value={device.id}>
                 {device.name}
@@ -80,7 +73,7 @@ export const CreateDevice = ({
           </select>
         </div>
 
-        <div className="ml-4 flex flex-col gap-2 items-center justify-around md:flex-row md:justify-center md:items-center">
+        <div className="ml-4 flex flex-col gap-2 items-center justify-around md:flex-row md:justify-center md:items-center mt-5">
           <button className="btn-primary w-full flex  items-center justify-center">
             <span className="mr-2">Create Device</span>
             <i className="fa-regular fa-paper-plane"></i>
