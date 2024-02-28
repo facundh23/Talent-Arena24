@@ -1,13 +1,35 @@
 import axios from 'axios';
+import { EventSubscription } from '../interfaces/event';
 
-export class DeviceStatusClass {
-  public static async createSubscription(id: string): Promise<void> {
+interface DeviceStatusResponse {
+  eventSubscriptionId: string;
+  subscriptionDetail: SubscriptionDetail;
+  webhook: Webhook;
+  startsAt: string;
+}
+
+interface Webhook {
+  notificationUrl: string;
+  authorizationToken: string;
+}
+
+interface SubscriptionDetail {
+  device: {
+    networkAccessIdentifier: string;
+  };
+  eventType: string;
+}
+
+export class DeviceStatusClient {
+  public static async createSubscription(
+    id: string
+  ): Promise<DeviceStatusResponse> {
     const options = {
       method: 'POST',
       url: 'https://device-status.p-eu.rapidapi.com/event-subscriptions',
       headers: {
         'content-type': 'application/json',
-        'X-RapidAPI-Key': 'd4805fc215msh17feb8ff7dc457ep123ce1jsnd43c154d66b5',
+        'X-RapidAPI-Key': process.env.API_KEY,
         'X-RapidAPI-Host': 'device-status.nokia.rapidapi.com',
       },
       data: {
@@ -27,7 +49,7 @@ export class DeviceStatusClass {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+      return response.data;
     } catch (error) {
       console.error(error);
     }

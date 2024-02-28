@@ -1,20 +1,22 @@
-import { Marker } from 'react-leaflet';
+import { Marker, Popup } from 'react-leaflet';
 import { Device } from '../../interfaces/device';
 import { MapContainer } from 'react-leaflet/MapContainer';
 import { TileLayer } from 'react-leaflet/TileLayer';
 import { LatLngExpression } from 'leaflet';
+import DevicePopup from './DevicePopup';
 
 interface Props {
   devices: Device[];
+  onClickAddTracking: (device: Device) => Promise<void>;
 }
 
-const MapComponent = ({ devices }: Props) => {
+const MapComponent = ({ devices, onClickAddTracking }: Props) => {
   const position: LatLngExpression = [41.390205, 2.154007];
 
   return (
-    <>
+    <div className="w-100vw bg-indigo-600 md:h-96 mt-2 p-2 rounded-lg flex items-center justify-center gap-7">
       <MapContainer
-        style={{ height: '500px' }}
+        className="h-full w-full"
         center={position}
         zoom={5}
         scrollWheelZoom={true}
@@ -24,10 +26,20 @@ const MapComponent = ({ devices }: Props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {devices.map((device) => (
-          <Marker position={[device.latitude, device.longitude]}></Marker>
+          <Marker
+            key={device.id}
+            position={[device.latitude, device.longitude]}
+          >
+            <Popup>
+              <DevicePopup
+                device={device}
+                onClickAddTracking={onClickAddTracking}
+              ></DevicePopup>
+            </Popup>
+          </Marker>
         ))}
       </MapContainer>
-    </>
+    </div>
   );
 };
 
