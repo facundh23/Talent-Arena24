@@ -3,7 +3,7 @@ import { Device } from '../../interfaces/device';
 
 interface Props {
   device: Device;
-  onClickAddTracking: (device: Device) => Promise<void>;
+  onClickAddTracking: (device: Device) => void;
 }
 
 const DevicePopup = ({ device, onClickAddTracking }: Props) => {

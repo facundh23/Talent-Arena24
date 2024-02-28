@@ -61,7 +61,7 @@ export const HomePage = () => {
         handleSearch={handleSearch}
       />
       {
-        !modalIsOpen ? <Map  devices={devices} onClickAddTracking={async (device: Device) => {console.log(device)}}></Map>
+        !modalIsOpen ? <Map  devices={devices}></Map>
         : <CreateDevice isOpen={modalIsOpen} closeModal={closeModal} options={DEVICE_TYPES}  />
       }
       <CounterDevices

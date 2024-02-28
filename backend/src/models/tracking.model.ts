@@ -26,6 +26,7 @@ export default (sequelize: Sequelize) => {
       },
       retrievalStatus: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       deviceId: {
         type: DataTypes.STRING,
