@@ -45,7 +45,7 @@ export const HomePage = () => {
     <div>
       <Navbar isOpen={openModal} />
       <ConsultDeviceText
-        placeholder="Create your device"
+        placeholder="Search your device"
         options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
