@@ -21,10 +21,10 @@ const ConsultDeviceText = ({ placeholder, options, handleSearch }: Props) => {
         event.preventDefault();
         handleSearch(name, type);
       }}
-      className="flex flex-col w-full md:flex-row items-center justify-center h-52 md:h-32 p-2 rounded-xl bg-indigo-600  px-4 w-100%"
+      className=" flex flex-col w-full h-full md:flex-row items-center justify-center h-52 md:h-[20%] p-2 rounded-xl border-4 secondColor border-white  px-4 w-100%"
     >
-      <div className="flex-grow w-full items-center justify-center md:gap-2">
-        <div className="flex flex-col items-center gap-2 md:flex-row md:w-100%">
+      <div className="flex-grow w-full h-full mx-auto items-center justify-center md:gap-2 secondColor ">
+        <div className="flex flex-col justify-center items-center gap-2 md:flex-row md:w-100%">
           <input
             type="text"
             autoFocus
