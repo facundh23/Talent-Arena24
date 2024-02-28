@@ -66,7 +66,7 @@ export const HomePage = () => {
         offlineDevices={devicesCount.offlineDevices}
         onlineDevices={devicesCount.onlineDevices}
       />
-      <div className="w-100vw bg-indigo-600 mt-2 p-2 rounded-lg flex flex-col gap-7">
+      <div className="navbarColor w-100vw bg-indigo-600 mt-2 p-2 rounded-lg flex flex-col gap-7 border-white border-4">
         <h2 style={{ fontWeight: 'bold' }}>Trackings list</h2>
         <div className="flex">
           <TrackingTable trackings={trackings}></TrackingTable>
