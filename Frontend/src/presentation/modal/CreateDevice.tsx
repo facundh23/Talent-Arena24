@@ -27,10 +27,10 @@ export const CreateDevice = ({
   };
 
   return (
-    <div className="w-full fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex  justify-center items-start md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-[9999]">
+    <div className="w-full fixed inset-0 bg-indigo-600 bg-opacity-25 backdrop-blur-sm flex  justify-center items-start md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-[9999]">
       <form
         onSubmit={onSubmitForm}
-        className="w-[100%] h-[50%]  border-x-indigo-500 border-y-black border-4 flex flex-col md:w-[90%] md:h-[20%] md:flex-col p-6 mt-[10%] gap-2  md:mx-auto transition-all duration-500"
+        className="w-[80%] h-[50%] navbarColor border-white border-4 flex flex-col md:w-[92%] md:h-[30%] md:flex-col md:justify-center p-6 mt-[10%] gap-2 md:mx-auto transition-all duration-500"
       >
         <div className="flex flex-col items-center gap-2 md:flex-row md:w-100%">
           <input

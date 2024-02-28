@@ -62,7 +62,7 @@ const MapComponent = ({ devices }: Props) => {
       <MapContainer
         className="h-full w-full"
         center={position}
-        zoom={5}
+        zoom={3}
         scrollWheelZoom={true}
       >
         <TileLayer
