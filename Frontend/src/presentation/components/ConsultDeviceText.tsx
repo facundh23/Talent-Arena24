@@ -2,7 +2,6 @@ import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface Props {
-    
     placeholder: string;
     options: Options[]
 }
@@ -16,7 +15,7 @@ interface Options {
 
 
 
-const ConsultDeviceText = ({  placeholder, options }: Props) => {
+const ConsultDeviceText = ({  placeholder, options, onSendQuery }: Props) => {
     const [query, setQuery] = useState<string>('');
     const [selectedOption, setSelectedOption] = useState<string>('')
 
