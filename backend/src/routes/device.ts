@@ -1,13 +1,17 @@
 import express from 'express';
-import { DeviceHandler } from '../handlers/device.handler';
+import { DeviceFilter, DeviceHandler } from '../handlers/device.handler';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const result = await DeviceHandler.getAllDevices();
+    const result = await DeviceHandler.getAllDevices({
+      name: req.query.name as string,
+      type: req.query.type as string,
+    });
     res.json(result);
   } catch (error) {
+    console.log(error);
     res.status(500).send();
   }
 });

@@ -1,7 +1,12 @@
 import { DeviceLocationClient } from '../clients/device-location.client';
+import { DeviceStatusClient } from '../clients/device-status.client';
 import { DeviceStatus } from '../enums/device-status';
 import { DeviceModel } from '../models/device.model';
 
+export interface DeviceFilter {
+  name: string;
+  type: string;
+}
 export interface DeviceBase {
   id: string;
   type: string;
@@ -16,6 +21,7 @@ export class DeviceHandler {
     name,
     type,
   }: DeviceBase): Promise<Device> {
+    await DeviceStatusClient.createSubscription(id);
     const { area } = await DeviceLocationClient.getDeviceLocation(id);
     const { latitude, longitude } = area.center;
     const result = await DeviceModel.create({
@@ -28,8 +34,19 @@ export class DeviceHandler {
     return result;
   }
 
-  public static async getAllDevices(): Promise<Device[]> {
-    return await DeviceModel.findAll();
+  public static async getAllDevices({
+    name,
+    type,
+  }: DeviceFilter): Promise<Device[]> {
+    const options: Record<string, any> = { where: {} };
+    if (name) {
+      options.where.name = name;
+    }
+
+    if (type) {
+      options.where.type = type;
+    }
+    return await DeviceModel.findAll(options);
   }
 
   public static async updateDeviceStatus(

@@ -24,7 +24,7 @@ const MapComponent = ({ devices }: Props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {devices.map((device) => (
-          <Marker position={[device.latitude, device.longitude]}></Marker>
+          <Marker key={device.id} position={[device.latitude, device.longitude]}></Marker>
         ))}
       </MapContainer>
     </>
