@@ -27,7 +27,7 @@ export const CreateDevice = ({
   };
 
   return (
-    <div className="w-[100%]  fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex  justify-center items-center md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-40">
+    <div className="w-[100%]  fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex  justify-center items-start md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-40">
       <form
         onSubmit={onSubmitForm}
         className="w-[70%] h-[50%]  border-x-indigo-500 border-y-black border-4 flex flex-col md:w-[70%] md:h-[20%] md:flex-col p-6 mt-[10%] gap-2  md:mx-auto transition-all duration-500"
