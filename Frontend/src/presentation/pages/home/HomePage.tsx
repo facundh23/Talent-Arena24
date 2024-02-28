@@ -10,9 +10,13 @@ import { DEVICE_TYPES } from '../../../constants/device-types';
 import Navbar from '../../components/Navbar';
 import { CreateDevice } from '../../modal/CreateDevice';
 import { createDevice } from '../../../core/use-case/create-device';
+import { Tracking } from '../../../interfaces/tracking';
+import { getAllTrackings } from '../../../core/use-case/get-all-trackings';
+import TrackingTable from '../../components/TrackingTable';
 
 export const HomePage = () => {
   const [devices, setDevices] = useState<Device[]>([]);
+  const [trackings, setTrackings] = useState<Tracking[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [devicesCount, setDevicesCount] = useState<DeviceCount>({
     offlineDevices: 0,
@@ -21,13 +25,13 @@ export const HomePage = () => {
 
   const openModal = () => {
     setModalIsOpen(true);
-    console.log('CLick');
   };
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
   useEffect(() => {
+    getAllTrackings().then(setTrackings);
     getAllDevices().then(setDevices);
     countDevices().then(setDevicesCount);
   }, []);
@@ -62,6 +66,12 @@ export const HomePage = () => {
         offlineDevices={devicesCount.offlineDevices}
         onlineDevices={devicesCount.onlineDevices}
       />
+      <div className="navbarColor w-100vw bg-indigo-600 mt-2 p-2 rounded-lg flex flex-col gap-7 border-white border-4">
+        <h2 style={{ fontWeight: 'bold' }}>Trackings list</h2>
+        <div className="flex">
+          <TrackingTable trackings={trackings}></TrackingTable>
+        </div>
+      </div>
     </div>
   );
 };

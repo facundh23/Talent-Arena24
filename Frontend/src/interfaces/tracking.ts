@@ -1,11 +1,8 @@
-export interface TrackingBase {
+export interface Tracking {
   id: number;
   endPointLatitude: string;
   endPointLongitud: string;
   retrievalStatus: boolean;
   deviceId: string;
-}
-
-export interface Tracking extends TrackingBase {
-  deviceName?: string;
+  deviceName: string;
 }
