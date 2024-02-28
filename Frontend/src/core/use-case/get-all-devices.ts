@@ -9,7 +9,7 @@ export const getAllDevices = async (
   queryParams?: DeviceQueryParams
 ): Promise<Device[]> => {
   try {
-    const { name, type } = { ...queryParams };
+    const { name = '', type = '' } = { ...queryParams };
     const resp = await fetch(
       `http://localhost:3000/device?name=${name}&type=${type}`,
       {

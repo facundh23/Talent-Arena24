@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import ConsultDeviceText from '../../components/ConsultDeviceText';
-import { CounterDevices } from '../../components/CounterDevices';
+import CounterDevices from '../../components/CounterDevices';
 import Map from '../../components/Map';
 import { Device } from '../../../interfaces/device';
 import { getAllDevices } from '../../../core/use-case/get-all-devices';
-
-const deviceTypes = [
-  { id: 'dron', name: 'Dron' },
-  { id: 'plane', name: 'Plane' },
-  { id: 'ship', name: 'Ship' },
-];
-
-
+import { DeviceCount } from '../../../interfaces/device-count';
+import { countDevices } from '../../../core/use-case/count-devices';
+import { DEVICE_TYPES } from '../../../constants/device-types';
 
 export const HomePage = () => {
   const [devices, setDevices] = useState<Device[]>([]);
+  const [devicesCount, setDevicesCount] = useState<DeviceCount>({
+    offlineDevices: 0,
+    onlineDevices: 0,
+  });
 
   useEffect(() => {
     getAllDevices().then(setDevices);
+    countDevices().then(setDevicesCount);
   }, []);
 
   // const handlePost = async (
@@ -44,11 +44,14 @@ export const HomePage = () => {
     <div>
       <ConsultDeviceText
         placeholder="Create your device"
-        options={deviceTypes}
+        options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
-      <CounterDevices />
-      <Map devices={devices}></Map>
+      <Map devices={devices} onClickAddTracking={async (device: Device) => {console.log(device)}}></Map>
+      <CounterDevices
+        offlineDevices={devicesCount.offlineDevices}
+        onlineDevices={devicesCount.onlineDevices}
+      />
     </div>
   );
 };

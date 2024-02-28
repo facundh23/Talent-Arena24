@@ -20,7 +20,7 @@ router.get('/status-count', async (req, res) => {
   try {
     const offlineDevices = await DeviceHandler.countOfflineDevices();
     const onlineDevices = await DeviceHandler.countOnlineDevices();
-    res.json({offlineDevices, onlineDevices});
+    res.json({ offlineDevices, onlineDevices });
   } catch (error) {
     res.status(500).send();
   }
