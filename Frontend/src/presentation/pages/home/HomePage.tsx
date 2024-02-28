@@ -53,9 +53,8 @@ export const HomePage = () => {
         options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
-      {!modalIsOpen ? (
-        <Map devices={devices}></Map>
-      ) : (
+      <Map devices={devices}></Map>
+      {!modalIsOpen ? null : (
         <CreateDevice
           closeModal={closeModal}
           options={DEVICE_TYPES}
