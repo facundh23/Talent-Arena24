@@ -7,13 +7,25 @@ import { getAllDevices } from '../../../core/use-case/get-all-devices';
 import { DeviceCount } from '../../../interfaces/device-count';
 import { countDevices } from '../../../core/use-case/count-devices';
 import { DEVICE_TYPES } from '../../../constants/device-types';
+import Navbar from '../../components/Navbar';
+import { CreateDevice } from '../../modal/CreateDevice';
 
 export const HomePage = () => {
   const [devices, setDevices] = useState<Device[]>([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [devicesCount, setDevicesCount] = useState<DeviceCount>({
     offlineDevices: 0,
     onlineDevices: 0,
   });
+
+  const openModal = () => {
+    setModalIsOpen(true);
+    console.log('CLick')
+  };
+ const closeModal = () => {
+  setModalIsOpen(false);
+ }
+
 
   useEffect(() => {
     getAllDevices().then(setDevices);
@@ -42,16 +54,22 @@ export const HomePage = () => {
 
   return (
     <div>
+      <Navbar isOpen={openModal}/>
       <ConsultDeviceText
         placeholder="Create your device"
         options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
-      <Map devices={devices} onClickAddTracking={async (device: Device) => {console.log(device)}}></Map>
+      {
+        !modalIsOpen ? <Map  devices={devices} onClickAddTracking={async (device: Device) => {console.log(device)}}></Map>
+        : <CreateDevice isOpen={modalIsOpen} closeModal={closeModal} options={DEVICE_TYPES}  />
+      }
       <CounterDevices
         offlineDevices={devicesCount.offlineDevices}
         onlineDevices={devicesCount.onlineDevices}
-      />
+        />
+       
+       
     </div>
   );
 };

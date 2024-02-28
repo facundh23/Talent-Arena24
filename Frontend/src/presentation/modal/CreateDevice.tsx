@@ -3,7 +3,8 @@ import { FormEvent, useState } from 'react'
 interface Props {
     onSendQuery: (query: string, selectedOption: string, id: string) => void;
     closeModal:() => void;
-    options: Options[]
+    isOpen: () => void
+    options: any[]
 }
 
 interface Options {
@@ -23,13 +24,13 @@ export const CreateDevice = ({ onSendQuery,  options, closeModal }: Props) => {
         setQuery('');
     }
     return (
-        <div className="w-[100%] fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex justify-center items-center md:h-[screen] lg:w-[100%] lg:mx-auto lg:h-[100%] lg:mt-11 z-40">
+        <div className="w-[100%]  fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md flex  justify-center items-center md:h-[100%]  lg:w-[100%] lg:mx-auto lg:h-[100%] z-40">
 
             <form
                 onSubmit={handleSendQuery}
-                className='w-[70%] h-200 mx-auto border-x-cyan-500 border-y-black border-4 flex flex-col p-6 mt-[10%] gap-2 md:w-[80%] md:mx-auto transition-all duration-500'
+                className='w-[70%] h-[80%]  border-x-indigo-500 border-y-black border-4 flex flex-col md:w-[70%] md:h-[20%] md:flex-col p-6 mt-[10%] gap-2  md:mx-auto transition-all duration-500'
             >
-                <div className='flex-grow w-full'>
+               
                     <div className='flex flex-col items-center gap-2 md:flex-row md:w-100%'>
                         <input
                             type="text"
@@ -57,12 +58,12 @@ export const CreateDevice = ({ onSendQuery,  options, closeModal }: Props) => {
                             {
                                 options.map(device => (
 
-                                    <option key={device.id} value={device.id}>{device.text}</option>
+                                    <option key={device.id} value={device.id}>{device.name}</option>
                                 ))
                             }
                         </select>
                     </div>
-                </div>
+                
 
 
                 <div className='ml-4 flex flex-col gap-2 items-center justify-around md:flex-row md:justify-center md:items-center'>
