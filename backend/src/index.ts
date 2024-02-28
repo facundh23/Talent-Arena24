@@ -23,6 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/device', deviceRoute);
 app.use('/device-type', deviceTypeRoute);
 app.use('/notify', notifyRoute);
+app.use('/tracking', trackingRoute);
 
 
 

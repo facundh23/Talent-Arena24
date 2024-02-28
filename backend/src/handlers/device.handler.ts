@@ -58,4 +58,18 @@ export class DeviceHandler {
     await deviceFound.save();
     return deviceFound;
   }
+
+  public static async countOnlineDevices(): Promise<number> {
+    const onlineDevices = await DeviceModel.count({
+      where: { status: DeviceStatus.REACHABLE}
+    })
+    return onlineDevices;
+  }
+
+  public static async countOfflineDevices():Promise<number>{
+    const offlineDevices = await DeviceModel.count({
+      where: {status: DeviceStatus.UNREACHABLE}
+    })
+    return offlineDevices;
+  }
 }
