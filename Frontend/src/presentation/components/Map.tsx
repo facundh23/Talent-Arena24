@@ -20,7 +20,7 @@ const TrackingMarker = ({ device, onCreateTracking }: TrackingMarkerProps) => {
   const [isRequestInProgress, setIsRequestInProgress] =
     useState<boolean>(false);
   const [position, setPosition] = useState<LatLngExpression | null>(null);
-  const map = useMapEvents({
+  useMapEvents({
     click: async (e) => {
       if (!isRequestInProgress) {
         setIsRequestInProgress(true);

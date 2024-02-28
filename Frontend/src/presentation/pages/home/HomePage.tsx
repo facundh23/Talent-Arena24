@@ -9,6 +9,7 @@ import { countDevices } from '../../../core/use-case/count-devices';
 import { DEVICE_TYPES } from '../../../constants/device-types';
 import Navbar from '../../components/Navbar';
 import { CreateDevice } from '../../modal/CreateDevice';
+import { createDevice } from '../../../core/use-case/create-device';
 
 export const HomePage = () => {
   const [devices, setDevices] = useState<Device[]>([]);
@@ -20,32 +21,20 @@ export const HomePage = () => {
 
   const openModal = () => {
     setModalIsOpen(true);
-    console.log('CLick')
+    console.log('CLick');
   };
- const closeModal = () => {
-  setModalIsOpen(false);
- }
-
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     getAllDevices().then(setDevices);
     countDevices().then(setDevicesCount);
   }, []);
 
-  // const handlePost = async (
-  //   text: string,
-  //   selectedOption: string,
-  //   id: string
-  // ) => {
-  //   setIsloading(true);
-  //   const newQuery = `${text} - ${selectedOption}`;
-  //   setMessages((prev) => [...prev, { text: newQuery }]);
-
-  //   const data = await searchQueryUseCase(text, selectedOption, id);
-  //   if (!data.ok) return;
-
-  //   setIsloading(false);
-  // };
+  const handleCreateDevice = async (data: Partial<Device>) => {
+    await createDevice(data);
+  };
 
   const handleSearch = async (name: string, type: string) => {
     const devices = await getAllDevices({ name, type });
@@ -54,22 +43,25 @@ export const HomePage = () => {
 
   return (
     <div>
-      <Navbar isOpen={openModal}/>
+      <Navbar isOpen={openModal} />
       <ConsultDeviceText
         placeholder="Create your device"
         options={DEVICE_TYPES}
         handleSearch={handleSearch}
       />
-      {
-        !modalIsOpen ? <Map  devices={devices}></Map>
-        : <CreateDevice isOpen={modalIsOpen} closeModal={closeModal} options={DEVICE_TYPES}  />
-      }
+      {!modalIsOpen ? (
+        <Map devices={devices}></Map>
+      ) : (
+        <CreateDevice
+          closeModal={closeModal}
+          options={DEVICE_TYPES}
+          handleCreateDevice={handleCreateDevice}
+        />
+      )}
       <CounterDevices
         offlineDevices={devicesCount.offlineDevices}
         onlineDevices={devicesCount.onlineDevices}
-        />
-       
-       
+      />
     </div>
   );
 };

@@ -9,7 +9,13 @@ export class TrackingHandler {
     retrievalStatus,
     deviceId,
   }: TrackingBase): Promise<Tracking> {
-    const result = await TrackingModel.create({ id, endPointLatitude, endPointLongitud, retrievalStatus, deviceId });
+    const result = await TrackingModel.create({
+      id,
+      endPointLatitude,
+      endPointLongitud,
+      retrievalStatus,
+      deviceId,
+    });
     return result.toJSON();
   }
 }
